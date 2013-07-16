@@ -4,7 +4,7 @@
 
 #include <openssl/rand.h>
 
-#define PACKAGE_NAME "Crypt::OpenSSL::RSA"
+#define PACKAGE_NAME "Crypt::OpenSSL::Random"
 
 MODULE = Crypt::OpenSSL::Random		PACKAGE = Crypt::OpenSSL::Random
 void
@@ -22,7 +22,7 @@ PPCODE:
 
     if(RAND_bytes(rand_bytes, num_bytes))
     {
-        XPUSHs(sv_2mortal(newSVpv(rand_bytes, num_bytes)));
+      XPUSHs(sv_2mortal(newSVpv((const char*)rand_bytes, num_bytes)));
         Safefree(rand_bytes);
         XSRETURN(1);
     }
@@ -47,7 +47,7 @@ PPCODE:
 
     if(RAND_bytes(rand_bytes, num_bytes))
     {
-        XPUSHs(sv_2mortal(newSVpv(rand_bytes, num_bytes)));
+        XPUSHs(sv_2mortal(newSVpv((const char*)rand_bytes, num_bytes)));
         Safefree(rand_bytes);
         XSRETURN(1);
     }
